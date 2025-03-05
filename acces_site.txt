@@ -1,0 +1,8 @@
+URL du site :
+neo.alwaysdata.net
+
+Identifiant :
+toto@blabla.com
+
+Mot de passe :
+$iutinfo

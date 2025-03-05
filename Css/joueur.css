@@ -1,0 +1,4 @@
+button.delete:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

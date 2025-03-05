@@ -1,0 +1,22 @@
+#matchSelect{
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    font-size: 0.8em;
+}
+
+option{
+    font-size: 0.7em;
+}
+
+.checkBox{
+    display: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
