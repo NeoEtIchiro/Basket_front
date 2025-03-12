@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Css/style.css">
+    <link rel="stylesheet" href="../Css/rencontre.css">
+    <link rel="stylesheet" href="../Css/popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Gestion des Rencontres</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>
+        <select id="matchSelect">
+            <option value="upcoming">Matchs à venir</option>
+            <option value="past">Matchs passés</option>
+        </select>
+    </h1>
+
+    <button class="openPopupBtn">Ajouter un Nouveau Match</button>
+
+    <div id="popupForm" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <h2 id="popupTitle">Ajouter un Nouveau Match</h2>
+            <form id="rencontreForm">
+                <label for="date">Date :</label>
+                <input type="date" id="date" required><br>
+                <label for="time">Heure :</label>
+                <input type="time" id="time" required><br>
+                <label for="lieu">Lieu :</label>
+                <input type="text" id="lieu" required><br>
+                <label for="adversaire">Adversaire :</label>
+                <input type="text" id="adversaire" required><br>
+                <button type="submit" id="formSubmitBtn">Ajouter le Match</button>
+            </form>
+        </div>
+    </div>
+
+    <table id="upcomingMatches">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Lieu</th>
+            <th>Adversaire</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Les matchs à venir seront insérés ici dynamiquement -->
+        </tbody>
+    </table>
+
+    <table id="pastMatches" style="display: none;">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Lieu</th>
+            <th>Adversaire</th>
+            <th>Résultat</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Les matchs passés seront insérés ici dynamiquement -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.getElementById("matchSelect").onchange = function () {
+        let selectedValue = this.value;
+        document.getElementById("upcomingMatches").style.display = selectedValue === "upcoming" ? "table" : "none";
+        document.getElementById("pastMatches").style.display = selectedValue === "past" ? "table" : "none";
+    };
+
+    var addPopup = document.getElementById("popupForm");
+    var addBtn = document.getElementsByClassName("openPopupBtn")[0];
+    var addClose = document.getElementsByClassName("close")[0];
+
+    addBtn.onclick = function () {
+        addPopup.style.display = "block";
+    };
+
+    addClose.onclick = function () {
+        addPopup.style.display = "none";
+    };
+
+    window.onclick = function (event) {
+        if (event.target === addPopup) {
+            addPopup.style.display = "none";
+        }
+    };
+</script>
+
+</body>
+</html>
