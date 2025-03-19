@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='../Css/style.css'>
-    <link rel="stylesheet" href='../Css/joueur.css'>
-    <link rel="stylesheet" href='../Css/popup.css'>
+    <link rel="stylesheet" href="../Css/style.css">
+    <link rel="stylesheet" href="../Css/joueur.css">
+    <link rel="stylesheet" href="../Css/popup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Gestion des Joueurs</title>
 </head>
 <body>
-<!-- <?php include __DIR__ . '/../navbar.php'; ?> -->
+
+<?php include __DIR__ . '/../navbar.php'; ?>
+
 <div class="container">
     <h1>Joueurs</h1>
 
@@ -47,7 +49,6 @@
                 <textarea id="commentaire" name="commentaire"></textarea><br>
 
                 <label for="statut">Statut :</label>
-
                 <select id="statut" name="statut" required>
                     <option value="Actif">Actif</option>
                     <option value="Blessé">Blessé</option>
@@ -63,61 +64,89 @@
     <!-- Table d'affichage des joueurs -->
     <table>
         <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Numéro de Licence</th>
-            <th>Date de Naissance</th>
-            <th class="adaptive-column">Taille</th>
-            <th class="adaptive-column">Poids</th>
-            <th>Commentaire</th>
-            <th>Statut</th>
-            <th class="adaptive-column">Actions</th>
-        </tr>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Numéro de Licence</th>
+                <th>Date de Naissance</th>
+                <th class="adaptive-column">Taille</th>
+                <th class="adaptive-column">Poids</th>
+                <th>Commentaire</th>
+                <th>Statut</th>
+                <th class="adaptive-column">Actions</th>
+            </tr>
         </thead>
         <tbody>
-        <!-- remplissage du tableau -->
+        <?php foreach ($joueurs as $joueur): ?>
+            <tr>
+                <!-- On peut conserver un unique formulaire pour chaque ligne ou adapter selon vos besoins -->
+                <form action="gestion_joueur.php" method="post">
+                    <input type="hidden" name="id" value="<?= $joueur['id_joueur'] ?>">
+                    <td><?= htmlspecialchars($joueur['nom']) ?></td>
+                    <td><?= htmlspecialchars($joueur['prenom']) ?></td>
+                    <td><?= htmlspecialchars($joueur['licence']) ?></td>
+                    <td><?= date('d/m/Y', strtotime($joueur['dateNaissance'])) ?></td>
+                    <td><?= htmlspecialchars($joueur['taille']) ?>cm</td>
+                    <td><?= htmlspecialchars($joueur['poids']) ?>kg</td>
+                    <td><?= htmlspecialchars($joueur['commentaire']) ?></td>
+                    <td><?= htmlspecialchars($joueur['statut']) ?></td>
+                    <td>
+                        <div class="action-container">
+                            <button type="button" class="actionBtn editBtn" 
+                                    data-id="<?= $joueur['id_joueur'] ?>"
+                                    data-nom="<?= htmlspecialchars($joueur['nom']) ?>"
+                                    data-prenom="<?= htmlspecialchars($joueur['prenom']) ?>"
+                                    data-licence="<?= htmlspecialchars($joueur['licence']) ?>"
+                                    data-dateNaissance="<?= htmlspecialchars($joueur['dateNaissance']) ?>"
+                                    data-taille="<?= htmlspecialchars($joueur['taille']) ?>"
+                                    data-poids="<?= htmlspecialchars($joueur['poids']) ?>"
+                                    data-commentaire="<?= htmlspecialchars($joueur['commentaire']) ?>"
+                                    data-statut="<?= htmlspecialchars($joueur['statut']) ?>">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <form action="gestion_joueur.php" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="<?= $joueur['id_joueur'] ?>">
+                                <button class="actionBtn delete" type="submit" name="delete_joueur" 
+                                    <?= checkParticipated($joueur['id_joueur']) ? 'disabled' : '' ?>>
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </form>
+            </tr>
+        <?php endforeach; ?>
         </tbody>
     </table>
 </div>
 
 <script>
-    // Get the modal
+    // Gestion de l'ouverture et fermeture du popup
     var popup = document.getElementById("popupForm");
-
-    // Get the button that opens the modal
     var btn = document.getElementsByClassName("openPopupBtn")[0];
-
-    // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
 
-    // When the user clicks the button, open the modal
     btn.onclick = function() {
         document.getElementById("popupTitle").innerText = "Ajouter un Nouveau Joueur";
         document.getElementById("joueurForm").reset();
         document.getElementById("joueurId").value = "";
-        document.getElementById("formAction").name = "add";
+        // On définit l'action via un champ caché ou le name de l'input
+        document.getElementById("formAction").value = "add";
         document.getElementsByClassName("formSubmitBtn")[0].innerText = "Ajouter le Joueur";
         popup.style.display = "block";
     }
 
-    // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
-        console.log("close");
         popup.style.display = "none";
     }
-
-    // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == popup) {
             popup.style.display = "none";
         }
     }
-
-    // Get all edit buttons
+    
+    // Gestion des boutons d'édition
     var editBtns = document.getElementsByClassName("editBtn");
-
-    // Add click event to each edit button
     for (var i = 0; i < editBtns.length; i++) {
         editBtns[i].onclick = function() {
             document.getElementById("popupTitle").innerText = "Modifier le Joueur";
@@ -130,11 +159,13 @@
             document.getElementById("poids").value = this.getAttribute("data-poids");
             document.getElementById("commentaire").value = this.getAttribute("data-commentaire");
             document.getElementById("statut").value = this.getAttribute("data-statut");
-            document.getElementById("formAction").name = "update";
+            document.getElementById("formAction").value = "update";
             document.getElementsByClassName("formSubmitBtn")[0].innerText = "Modifier le Joueur";
             popup.style.display = "block";
         }
     }
+    // La soumission du formulaire se fait via le comportement par défaut (POST vers gestion_joueur.php)
+    // Aucune requête API n'est exécutée côté vue.
 </script>
 
 </body>

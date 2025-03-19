@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['utilisateur_id']) && !isset($_COOKIE['utilisateur_id'])) {
-    header("Location: /Login/login.php");
+    header("Location: Controllers/login.php");
     exit;
 }
 

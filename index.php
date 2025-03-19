@@ -6,9 +6,9 @@
     </head>
     <body>
     <?php
-        require_once __DIR__ . '/Login/auth.php';
+        require_once './Controllers/auth.php';
         // Redirection vers gestion_joueur.php
-        header("Location: Joueur/gestion_joueur.php");
+        header("Location: ./Controllers/joueurController.php");
         exit;
         ?>
     </body>
