@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Css/style.css">
+    <link rel="stylesheet" href="../Css/rencontre.css">
+    <link rel="stylesheet" href="../Css/popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Gestion des Rencontres</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Rencontres</h1>
+        <!-- Filtre entre matchs à venir et matchs passés -->
+        <select id="matchFilter">
+            <option value="upcoming">Matchs à venir</option>
+            <option value="past">Matchs passés</option>
+        </select>
+        <!-- Bouton pour ouvrir la popup d'ajout -->
+        <button class="openPopupBtn">Ajouter une Nouvelle Rencontre</button>
+        
+        <!-- Popup - Formulaire d'ajout/modification d'une rencontre -->
+        <div id="popupForm" class="popup">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <h2 id="popupTitle">Ajouter une Nouvelle Rencontre</h2>
+                <form id="matchForm">
+                    <input type="hidden" id="matchId">
+                    <input type="hidden" id="formAction" value="add">
+                    <label for="date">Date :</label>
+                    <input type="date" id="date" name="date" required><br>
+                    <label for="time">Heure :</label>
+                    <input type="time" id="time" name="time" required><br>
+                    <label for="lieu">Lieu :</label>
+                    <input type="text" id="lieu" name="lieu" required><br>
+                    <label for="adversaire">Adversaire :</label>
+                    <input type="text" id="adversaire" name="adversaire" required><br>
+                    <button type="submit" class="formSubmitBtn">Ajouter la Rencontre</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Tableau d'affichage des rencontres -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Lieu</th>
+                    <th>Adversaire</th>
+                    <th id="resultHeader" style="display:none;">Résultat</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="matchesTableBody">
+                <!-- Lignes générées dynamiquement par JavaScript -->
+            </tbody>
+        </table>
+        
+        <!-- Popup - Formulaire de modification du résultat -->
+        <div id="resultPopupForm" class="popup">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <h2>Modifier le Résultat</h2>
+                <form id="resultForm">
+                    <input type="hidden" id="resultMatchId">
+                    <label for="scoreNous">Notre Score :</label>
+                    <input type="number" id="scoreNous" name="score_nous" required><br>
+                    <label for="scoreAdversaire">Score Adversaire :</label>
+                    <input type="number" id="scoreAdversaire" name="score_adversaire" required><br>
+                    <button type="submit">Mettre à jour le Résultat</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="../Javascript/rencontreJs.js"></script>
+</body>
+</html>

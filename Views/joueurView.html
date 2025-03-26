@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Css/style.css">
+    <link rel="stylesheet" href="../Css/joueur.css">
+    <link rel="stylesheet" href="../Css/popup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Gestion des Joueurs</title>
+</head>
+<body>
+
+    <!-- Inclusion de la navbar si nécessaire -->
+    <div id="navbar">
+        <!-- Contenu de votre navbar -->
+    </div>
+
+    <div class="container">
+        <h1>Joueurs</h1>
+
+        <!-- Bouton d'ouverture du popup -->
+        <button class="openPopupBtn">Ajouter un Nouveau Joueur</button>
+
+        <!-- Popup Formulaire -->
+        <div id="popupForm" class="popup">
+            <div class="popup-content">
+                <span class="close">&times;</span>
+                <h2 id="popupTitle">Ajouter un Nouveau Joueur</h2>
+                <form id="joueurForm">
+                    <input type="hidden" id="joueurId">
+                    <input type="hidden" id="formAction" value="add">
+                    <label for="nom">Nom :</label>
+                    <input type="text" id="nom" name="nom" required><br>
+
+                    <label for="prenom">Prénom :</label>
+                    <input type="text" id="prenom" name="prenom" required><br>
+
+                    <label for="numero_licence">Numéro de Licence :</label>
+                    <input type="text" id="numero_licence" name="numero_licence" required><br>
+
+                    <label for="date_naissance">Date de Naissance :</label>
+                    <input type="date" id="date_naissance" name="date_naissance" required><br>
+
+                    <label for="taille">Taille (en cm) :</label>
+                    <input type="number" id="taille" name="taille" required><br>
+
+                    <label for="poids">Poids (en kg) :</label>
+                    <input type="number" id="poids" name="poids" required><br>
+
+                    <label for="commentaire">Commentaire :</label>
+                    <textarea id="commentaire" name="commentaire"></textarea><br>
+
+                    <label for="statut">Statut :</label>
+                    <select id="statut" name="statut" required>
+                        <option value="Actif">Actif</option>
+                        <option value="Blessé">Blessé</option>
+                        <option value="Suspendu">Suspendu</option>
+                        <option value="Absent">Absent</option>
+                    </select><br>
+
+                    <button type="submit" class="formSubmitBtn">Ajouter le Joueur</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tableau d'affichage -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Licence</th>
+                    <th>Date de Naissance</th>
+                    <th class="adaptive-column">Taille</th>
+                    <th class="adaptive-column">Poids</th>
+                    <th>Commentaire</th>
+                    <th>Statut</th>
+                    <th class="adaptive-column">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="playersTableBody">
+                <!-- Ligne générée dynamiquement -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Inclusion du script de contrôle -->
+    <script src="../Javascript/joueurJs.js"></script>
+</body>
+</html>

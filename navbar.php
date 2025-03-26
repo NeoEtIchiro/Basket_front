@@ -13,8 +13,8 @@
             <h2>My Basket Team</h2>
         </div>
         <ul class="navbar-menu">
-            <li><a href="/Joueur/gestion_joueur.php">Gestion des Joueurs</a></li>
-            <li><a href="/Rencontre/gestion_rencontre.php">Gestion des Matchs</a></li>
+            <li><a href="/Basket_front/Controllers/joueurController.php">Gestion des Joueurs</a></li>
+            <li><a href="/Basket_front/Controllers/rencontreController.php">Gestion des Matchs</a></li>
             <li><a href="/Statistique/statistiques.php">Statistiques</a></li>
             <li><a href="/Basket_front/Controllers/logout.php">Déconnexion</a></li>
         </ul>

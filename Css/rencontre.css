@@ -20,3 +20,9 @@ option{
     border-radius: 5px;
 }
 
+table th:last-child, 
+table td:last-child {
+    width: 1%;
+    white-space: nowrap;
+}
+
