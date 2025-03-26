@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistiques</title>
+    <link rel="stylesheet" href="../Css/style.css">
+    <link rel="stylesheet" href="../Css/stats.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Statistiques</h1>
+
+        <div id="globalStats">
+            <h2>Statistiques Globales</h2>
+            <p>Nombre total de matchs : </p>
+            <p>Matchs gagnés : </p>
+            <p>Matchs nuls : </p>
+            <p>Matchs perdus : </p>
+        </div>
+
+        <hr>
+
+        <div id="playerStatsSection">
+            <h2>Statistiques par Joueur</h2>
+            <label for="playerSelect">Choisir un joueur :</label>
+            <select id="playerSelect">
+                <option value="">--Sélectionner un joueur--</option>
+            </select>
+            <div id="playerStats">
+                <!-- Les statistiques du joueur choisi seront affichées ici -->
+            </div>
+        </div>
+    </div>
+    <script src="../Javascript/statsJs.js"></script>
+</body>
+</html>

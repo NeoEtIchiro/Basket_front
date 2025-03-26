@@ -15,7 +15,7 @@
         <ul class="navbar-menu">
             <li><a href="/Basket_front/Controllers/joueurController.php">Gestion des Joueurs</a></li>
             <li><a href="/Basket_front/Controllers/rencontreController.php">Gestion des Matchs</a></li>
-            <li><a href="/Statistique/statistiques.php">Statistiques</a></li>
+            <li><a href="/Basket_front/Controllers/statsController.php">Statistiques</a></li>
             <li><a href="/Basket_front/Controllers/logout.php">Déconnexion</a></li>
         </ul>
     </nav>
